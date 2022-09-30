@@ -1,8 +1,14 @@
 #!/bin/bash
 
+#
+# To add your host into /hosts file run script as follows:
+# ./add_host_to_etc.sh HostIP HostName
+# ./add_host_to_etc.sh 127.0.0.1 Localhost
+#
+
 [ $EUID -eq 0 ] || { echo "Run this script as root"; exit 1; }
 
-path=dupa
+path=default
 
 case "$(uname -sr)" in
    Darwin*)
@@ -17,7 +23,7 @@ case "$(uname -sr)" in
      path="c:\Windows\System32\Drivers\etc\hosts"
      ;;
    *)
-     echo 'Niet obslugiwany OS wydupiej'; exit 1; 
+     echo 'Script does not support your OS'; exit 1;
      ;;
 esac
 
