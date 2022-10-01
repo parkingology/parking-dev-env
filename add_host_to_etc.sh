@@ -8,8 +8,6 @@
 
 [ $EUID -eq 0 ] || { echo "Run this script as root"; exit 1; }
 
-path=default
-
 case "$(uname -sr)" in
    Darwin*)
      path="/private/etc/hosts"
