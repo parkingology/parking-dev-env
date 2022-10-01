@@ -27,10 +27,10 @@ esac
 
 case "$1" in
   -h)
-     echo "Execute script, as args provide Host IP and Host name that you want to set";;
+     echo "Execute script with 2 arguments, as args provide Host IP and Host name that you want to set";;
 
   --help)
-     echo "Execute script, as args provide Host IP and Host name that you want to set";;
+     echo "Execute script with 2 arguments, as args provide Host IP and Host name that you want to set";;
   
   *)
      [ $# -eq 2 ] || { echo "Provide Host IP and Host name that you want to set"; exit 1; } 
