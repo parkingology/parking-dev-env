@@ -6,35 +6,43 @@
 # ./add_host_to_etc.sh 127.0.0.1 Localhost
 #
 
-[ $EUID -eq 0 ] || { echo "Run this script as root"; exit 1; }
+[ $EUID -eq 0 ] || {
+  echo "Run this script as root"
+  exit 1
+}
 
 case "$(uname -sr)" in
-   Darwin*)
-     path="/private/etc/hosts"
-     ;;
+Darwin*)
+  path="/private/etc/hosts"
+  ;;
 
-   Linux*)
-     path="/etc/hosts"
-     ;;
+Linux*)
+  path="/etc/hosts"
+  ;;
 
-   CYGWIN*|MINGW*|MINGW32*|MSYS*)
-     path="c:\Windows\System32\Drivers\etc\hosts"
-     ;;
-   *)
-     echo 'Script does not support your OS'; exit 1;
-     ;;
+CYGWIN* | MINGW* | MINGW32* | MSYS*)
+  path="c:\Windows\System32\Drivers\etc\hosts"
+  ;;
+*)
+  echo 'Script does not support your OS'
+  exit 1
+  ;;
 esac
 
 case "$1" in
-  -h)
-     echo "Execute script with 2 arguments, as args provide Host IP and Host name that you want to set";;
+-h)
+  echo "Execute script with 2 arguments, as args provide Host IP and Host name that you want to set"
+  ;;
 
-  --help)
-     echo "Execute script with 2 arguments, as args provide Host IP and Host name that you want to set";;
-  
-  *)
-     [ $# -eq 2 ] || { echo "Provide Host IP and Host name that you want to set"; exit 1; } 
-     echo "$1    $2" >> $path
-     ;;
+--help)
+  echo "Execute script with 2 arguments, as args provide Host IP and Host name that you want to set"
+  ;;
+
+*)
+  [ $# -eq 2 ] || {
+    echo "Provide Host IP and Host name that you want to set"
+    exit 1
+  }
+  echo "$1    $2" >>$path
+  ;;
 esac
-
