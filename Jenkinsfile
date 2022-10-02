@@ -5,9 +5,7 @@ pipeline {
         stage('run docker compose') {
             steps {
                 echo 'hello world'
-                sh 'cd compose/'
-                sh 'ls'
-                sh 'docker compose -f main-infrastructure.yml up -d'
+                sh 'docker compose -f compose/main-infrastructure.yml up -d'
             }
         }
     }
