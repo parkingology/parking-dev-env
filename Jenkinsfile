@@ -15,6 +15,7 @@ pipeline {
                             returnStdout: true
                     ).trim()
                     assert httpStatus == '200'
+                    assert httpStatus == '500'
                 }
             }
         }
