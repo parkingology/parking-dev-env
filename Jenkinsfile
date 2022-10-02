@@ -9,8 +9,10 @@ pipeline {
         }
         stage('test if jeager is running') {
             steps {
-                def httpStatus = callSh("curl -s -o /dev/null -w \"%{http_code}\\n\" http://host.docker.internal:16686")
-                assert httpStatus == '200'
+                script {
+                    def httpStatus = callSh("curl -s -o /dev/null -w \"%{http_code}\\n\" http://host.docker.internal:16686")
+                    assert httpStatus == '200'
+                }
             }
         }
     }
