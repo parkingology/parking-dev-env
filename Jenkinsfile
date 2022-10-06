@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('run services') {
             steps {
-                sh 'docker-compose -f compose/main-infrastructure.yml up -d'
+                sh 'docker compose -f compose/main-infrastructure.yml up -d'
             }
         }
         stage('test if jeager is running') {
