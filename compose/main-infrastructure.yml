@@ -7,13 +7,40 @@ services:
     networks:
       - parkingology
     ports:
-      - 5775:5775/udp
-      - 5778:5778
-      - 6831:6831/udp
-      - 6832:6832/udp
-      - 9411:9411
-      - 14268:14268
-      - 16686:16686
+      - '5775:5775/udp'
+      - '5778:5778'
+      - '6831:6831/udp'
+      - '6832:6832/udp'
+      - '9411:9411'
+      - '14268:14268'
+      - '16686:16686'
+  elasticsearch:
+    container_name: elasticsearch
+    image: elasticsearch:7.16.3
+    ports:
+      - '9200:9200'
+    environment:
+      - discovery.type=single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+  kibana:
+    container_name: kibana
+    image: kibana:7.16.3
+    ports:
+      - '9999:5601'
+  logstash:
+    container_name: logstash
+    image: logstash:7.16.3
+    ports:
+      - '5002:5000'
+      - '9600:9600'
+    volumes:
+      - type: bind
+        source: ./logstash_pipeline/
+        target: /usr/share/logstash/pipeline
+        read_only: true
 networks:
   parkingology:
-    name: pacco-network
+    name: parking-network
