@@ -1,8 +1,12 @@
 version: '3.7'
 services:
   jaeger:
-    image: jaegertracing/all-in-one
     container_name: jaeger
+    image: jaegertracing/all-in-one
+    deploy:
+      resources:
+        limits:
+          memory: 512m
     restart: unless-stopped
     networks:
       - parkingology
@@ -17,6 +21,10 @@ services:
   elasticsearch:
     container_name: elasticsearch
     image: elasticsearch:7.16.3
+    deploy:
+      resources:
+        limits:
+          memory: 512m
     ports:
       - '9200:9200'
     environment:
@@ -28,11 +36,19 @@ services:
   kibana:
     container_name: kibana
     image: kibana:7.16.3
+    deploy:
+      resources:
+        limits:
+          memory: 512m
     ports:
       - '9999:5601'
   logstash:
     container_name: logstash
     image: logstash:7.16.3
+    deploy:
+      resources:
+        limits:
+          memory: 512m
     ports:
       - '5002:5000'
       - '9600:9600'
