@@ -24,7 +24,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 512m
+          memory: 1g
     ports:
       - '9200:9200'
     environment:
@@ -48,7 +48,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 512m
+          memory: 1g
     ports:
       - '5002:5000'
       - '9600:9600'
