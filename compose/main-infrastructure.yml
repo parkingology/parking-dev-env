@@ -27,8 +27,8 @@ services:
       - type: bind
         source: /home/opc/jenkins_data
         target: /etc
-        read_only: true
-    command: [ "--config=/etc/collector-gateway.yaml" ]
+        read_only: false
+    command: [ "--config=/etc/collector-gateway.yml" ]
     ports:
       - '1888:1888'   # pprof extension
       - '13133:13133' # health_check extension
