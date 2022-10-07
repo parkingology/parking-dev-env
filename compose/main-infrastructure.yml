@@ -25,8 +25,8 @@ services:
       - parkingology
     volumes:
       - type: bind
-        source: /home/opc/jenkins_data/collector-gateway.yml
-        target: /etc/collector-gateway.yml
+        source: /home/opc/jenkins_data
+        target: /etc
         read_only: true
     command: [ "--config=/etc/collector-gateway.yaml" ]
     ports:
