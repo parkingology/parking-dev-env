@@ -15,7 +15,7 @@ services:
       - '14268'
       - '14250'
   ocel-collector:
-    container_name: ocel-collector
+    container_name: otel-collector
     image: otel/opentelemetry-collector:0.29.0
     deploy:
       resources:
@@ -25,7 +25,7 @@ services:
       - parkingology
     volumes:
       - type: bind
-        source: /home/opc/jenkins_data
+        source: /home/opc/jenkins_data/otel
         target: /etc
         read_only: false
     command: [ "--config=/etc/collector-gateway.yml" ]
