@@ -13,7 +13,7 @@ pipeline {
                     checkout scm  // successfully accesses github credentials
                     withCredentials([sshUserPrivateKey(credentialsId: 'github-ssh')]) {
                         echo sh(
-                                script: "GIT_SSH_COMMAND='ssh -i ${keyfile} 'git ls-remote --heads \"https://github.com/parkingology/parking-dev-env-variables.git\" master",
+                                script: '''GIT_SSH_COMMAND='ssh -i ${keyfile} 'git ls-remote --heads \"https://github.com/parkingology/parking-dev-env-variables.git\" master''',
                                 returnStdout: true
                         ).trim()
                     }
