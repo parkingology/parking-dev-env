@@ -14,7 +14,7 @@ pipeline {
                     withCredentials([sshUserPrivateKey(credentialsId: "github-ssh", keyFileVariable: 'key')]) {
                         sh 'rm -rf envvars && mkdir envvars && cd envvars'
                         sh 'GIT_SSH_COMMAND="ssh -i $key"'
-                        sh 'ssh add $key'
+                        sh 'ssh-add $key'
                         sh(
                                 script: 'git clone "git@github.com:parkingology/parking-dev-env-variables.git"',
                                 returnStdout: true
