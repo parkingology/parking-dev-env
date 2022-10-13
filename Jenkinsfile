@@ -12,7 +12,7 @@ pipeline {
                 script {
                     checkout scm
                     withCredentials([sshUserPrivateKey(credentialsId: "github-ssh", keyFileVariable: 'key')]) {
-                        sh 'mdir envvars && envvars'
+                        sh 'mkdir envvars && envvars'
                         sh 'GIT_SSH_COMMAND = "ssh -i $key"'
                         sh(
                                 script: 'git clone "https://github.com/parkingology/parking-dev-env-variables.git"',
