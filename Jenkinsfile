@@ -15,7 +15,7 @@ pipeline {
                         sh 'rm -rf envvars && mkdir envvars && cd envvars'
                         sh 'GIT_SSH_COMMAND="ssh -i $key"'
                         sh(
-                                script: 'git clone "https://github.com/parkingology/parking-dev-env-variables.git"',
+                                script: 'git clone "https://tokuchar@github.com/parkingology/parking-dev-env-variables.git"',
                                 returnStdout: true
                         ).trim()
                     }
