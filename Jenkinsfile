@@ -10,7 +10,7 @@ pipeline {
         stage('test if jeager is running') {
             steps {
                 script {
-                    git credentialsId: 'tokuchar', url: 'https://github.com/parkingology/parking-dev-env-variables.git'
+                    git credentialsId: 'github-ssh', url: 'https://github.com/parkingology/parking-dev-env-variables.git'
                     sh "ls -lart ./*"
                     sh "git branch -a"
 
