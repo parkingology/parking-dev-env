@@ -10,6 +10,10 @@ pipeline {
         stage('test if jeager is running') {
             steps {
                 script {
+                    git credentialsId: 'tokuchar', url: 'https://github.com/parkingology/parking-dev-env-variables.git'
+                    sh "ls -lart ./*"
+                    sh "git branch -a"
+
                     def httpStatus = sh (
                             script: 'curl -s -o /dev/null -w \"%{http_code}\\n\" http://host.docker.internal:16686',
                             returnStdout: true
