@@ -10,10 +10,11 @@ pipeline {
         stage('test if jeager is running') {
             steps {
                 script {
-                    checkout scm  // successfully accesses github credentials
-                    withCredentials([sshUserPrivateKey(credentialsId: 'github-ssh')]) {
-                        echo sh(
-                                script: '''GIT_SSH_COMMAND='ssh -i ${keyfile} 'git ls-remote --heads \"https://github.com/parkingology/parking-dev-env-variables.git\" master''',
+                    checkout scm
+                    withCredentials([sshUserPrivateKey(credentialsId: "github-ssh", keyFileVariable: 'key')]) {
+                        sh 'GIT_SSH_COMMAND = "ssh -i $key"'
+                        sh(
+                                script: 'git ls-remote --heads "https://github.com/parkingology/parking-dev-env-variables.git"',
                                 returnStdout: true
                         ).trim()
                     }
