@@ -42,6 +42,7 @@ pipeline {
                 script {
                     testServiceWithCurl("${prodVariables.services.jaeger.url}", '200')
                     testServiceWithCurl("${prodVariables.services.kibana.url}", '302')
+                    testServiceWithCurl("${prodVariables.services.rabbitmq.url}", '200')
                 }
             }
         }
