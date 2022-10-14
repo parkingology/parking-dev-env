@@ -15,6 +15,7 @@ pipeline {
                 script {
                     checkout scm
                     withCredentials([sshUserPrivateKey(credentialsId: "github-ssh", keyFileVariable: 'key')]) {
+                        echo 'my file is: ' + "${envRepoName}/env/prod.yml"
                         sh 'rm -rf ${envRepoName}'
                         sh 'GIT_SSH_COMMAND="ssh -i $key"'
                         sh(
