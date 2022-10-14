@@ -1,4 +1,3 @@
-def prodVariables
 def envRepoName = 'parking-dev-env-variables'
 
 pipeline {
@@ -31,7 +30,7 @@ pipeline {
             steps {
                 script {
                     echo 'my file is: ' + "${envRepoName}/env/prod.yml"
-                    prodVariables = readYaml (file: "./${envRepoName}/env/prod.yml")
+                    def prodVariables = readYaml (file: "./${envRepoName}/env/prod.yml")
                     echo prodVariables
                 }
             }
