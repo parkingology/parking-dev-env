@@ -56,5 +56,7 @@ def testServiceWithCurl(url){
             script: "curl -s -o /dev/null -w \"%{http_code}\\n\" ${url}",
             returnStdout: true
     ).trim()
+
+    echo "responseStatus: ${httpStatus}"
     assert httpStatus == '200'
 }
