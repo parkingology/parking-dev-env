@@ -28,9 +28,10 @@ pipeline {
 
         stage('setup env addresses') {
             steps {
-                script {}
-                prodVariables = readYaml file: "${envRepoName}/env/prod.yml"
-                echo prodVariables
+                script {
+                    prodVariables = readYaml file: "${envRepoName}/env/prod.yml"
+                    echo prodVariables
+                }
             }
         }
 
