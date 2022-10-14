@@ -16,7 +16,6 @@ pipeline {
                     checkout scm
                     withCredentials([sshUserPrivateKey(credentialsId: "github-ssh", keyFileVariable: 'key')]) {
                         def githubRepo = "git@github.com:parkingology/${envRepoName}.git"
-                        echo 'github repository: ' + githubRepo
                         sh "rm -rf ${envRepoName}"
                         sh 'GIT_SSH_COMMAND="ssh -i $key"'
                         sh(
@@ -32,7 +31,7 @@ pipeline {
             steps {
                 script {
                     echo 'my file is: ' + "${envRepoName}/env/prod.yml"
-                    prodVariables = readYaml file: "${envRepoName}/env/prod.yml"
+                    prodVariables = readYaml (file: "./${envRepoName}/env/prod.yml")
                     echo prodVariables
                 }
             }
