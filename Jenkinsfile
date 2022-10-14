@@ -26,12 +26,14 @@ pipeline {
             }
         }
 
-        stage('setup env addresses'){
+        stage('setup env addresses') {
             steps {
+                script {}
                 prodVariables = readYaml file: "${envRepoName}/env/prod.yml"
                 echo prodVariables
             }
         }
+
 
         stage('test if jeager is running') {
             steps {
