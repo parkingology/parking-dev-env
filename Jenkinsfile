@@ -17,7 +17,7 @@ pipeline {
                     withCredentials([sshUserPrivateKey(credentialsId: "github-ssh", keyFileVariable: 'key')]) {
                         def githubRepo = "git@github.com:parkingology/${envRepoName}.git"
                         echo 'github repository: ' + githubRepo
-                        sh 'rm -rf ${envRepoName}'
+                        sh "rm -rf ${envRepoName}"
                         sh 'GIT_SSH_COMMAND="ssh -i $key"'
                         sh(
                                 script: 'eval "$(ssh-agent)" && ssh-add $key && git clone ' + githubRepo,
