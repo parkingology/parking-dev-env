@@ -41,15 +41,15 @@ pipeline {
         stage('test services') {
             steps {
                 script {
-                    testServiceWithCurl("${prodVariables.services.jaeger.url}")
-                    testServiceWithCurl("${prodVariables.services.kibana.url}")
+                    testServiceWithCurl("${prodVariables.services.jaeger.url}", '200')
+                    testServiceWithCurl("${prodVariables.services.kibana.url}", '302')
                 }
             }
         }
     }
 }
 
-def testServiceWithCurl(url){
+def testServiceWithCurl(url, expectedHttpStatus){
     echo "test ${url} host"
 
     def httpStatus = sh(
@@ -58,5 +58,5 @@ def testServiceWithCurl(url){
     ).trim()
 
     echo "responseStatus: ${httpStatus}"
-    assert httpStatus == '200'
+    assert httpStatus == expectedHttpStatus
 }
