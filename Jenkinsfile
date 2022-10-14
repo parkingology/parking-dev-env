@@ -15,11 +15,12 @@ pipeline {
                 script {
                     checkout scm
                     withCredentials([sshUserPrivateKey(credentialsId: "github-ssh", keyFileVariable: 'key')]) {
-                        echo 'my file is: ' + "${envRepoName}/env/prod.yml"
+                        def githubRepo = "git@github.com:parkingology/${envRepoName}.git"
+                        echo 'github repository: ' + githubRepo
                         sh 'rm -rf ${envRepoName}'
                         sh 'GIT_SSH_COMMAND="ssh -i $key"'
                         sh(
-                                script: 'eval "$(ssh-agent)" && ssh-add $key && git clone "git@github.com:parkingology/${envRepoName}.git"',
+                                script: 'eval "$(ssh-agent)" && ssh-add $key && git clone ' + githubRepo,
                                 returnStdout: true
                         ).trim()
                     }
