@@ -31,7 +31,7 @@ pipeline {
                 script {
                     echo 'my file is: ' + "${envRepoName}/env/prod.yml"
                     def prodVariables = readYaml (file: "./${envRepoName}/env/prod.yml")
-                    echo prodVariables
+                    echo "jaeger url is: ${prodVariables.services.jaeger.url}"
                 }
             }
         }
