@@ -1,4 +1,5 @@
 def envRepoName = 'parking-dev-env-variables'
+def prodVariables
 
 pipeline {
     agent any
@@ -30,24 +31,30 @@ pipeline {
             steps {
                 script {
                     echo 'my file is: ' + "${envRepoName}/env/prod.yml"
-                    def prodVariables = readYaml (file: "./${envRepoName}/env/prod.yml")
+                    prodVariables = readYaml (file: "./${envRepoName}/env/prod.yml")
                     echo "jaeger url is: ${prodVariables.services.jaeger.url}"
                 }
             }
         }
 
 
-        stage('test if jeager is running') {
+        stage('test services') {
             steps {
                 script {
-                    def httpStatus = sh(
-                            script: 'curl -s -o /dev/null -w \"%{http_code}\\n\" http://host.docker.internal:16686',
-                            returnStdout: true
-                    ).trim()
-                    assert httpStatus == '200'
+                    testServiceWithCurl("${prodVariables.services.jaeger.url}")
+                    testServiceWithCurl("${prodVariables.services.kibana.url}")
                 }
             }
         }
     }
+}
 
+def testServiceWithCurl(url){
+    echo "test ${url} host"
+
+    def httpStatus = sh(
+            script: "curl -s -o /dev/null -w \"%{http_code}\\n\" ${url}",
+            returnStdout: true
+    ).trim()
+    assert httpStatus == '200'
 }
