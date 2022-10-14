@@ -30,9 +30,8 @@ pipeline {
         stage('setup env addresses') {
             steps {
                 script {
-                    echo 'my file is: ' + "${envRepoName}/env/prod.yml"
+                    echo 'env file: ' + "${envRepoName}/env/prod.yml"
                     prodVariables = readYaml (file: "./${envRepoName}/env/prod.yml")
-                    echo "jaeger url is: ${prodVariables.services.jaeger.url}"
                 }
             }
         }

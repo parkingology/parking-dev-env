@@ -1,5 +1,18 @@
 version: '3.7'
 services:
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-management
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+    restart: always
+    networks:
+      - parkingology
+    ports:
+      - '15672:15672'
+      - '5672:5672'
   jaeger:
     container_name: jaeger
     image: jaegertracing/all-in-one
